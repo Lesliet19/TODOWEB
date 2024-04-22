@@ -6,6 +6,7 @@ from flask_bootstrap import Bootstrap4
 from datetime import datetime
 import random
 from apscheduler.schedulers.background import BackgroundScheduler
+
 from flask_wtf import FlaskForm
 from sqlalchemy.orm import DeclarativeBase
 from werkzeug.security import generate_password_hash, check_password_hash
