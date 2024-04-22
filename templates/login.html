@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% from "bootstrap4/form.html" import render_form %}
+
+
+
+{% block content %}
+<main class="mb-4">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+      {{ render_form(form) }}
+      {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+      <ul class="flash-messages">
+        {% for category, message in messages %}
+      <li class="{{ category }}">{{ message }}</li>
+      {% endfor %}
+      </ul>
+      {% endif %}
+      {% endwith %}
+      </div>
+    </div>
+  </div>
+</main>
+
+{% endblock %}
