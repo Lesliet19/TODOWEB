@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask, render_template, request, flash, redirect, url_for, session
 from flask_sqlalchemy import SQLAlchemy
 from flask_bootstrap import Bootstrap4
@@ -16,7 +18,7 @@ from forms import TaskForm, LoginForm, RegisterForm
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///todo.db'
-app.config['SECRET_KEY'] = 'itsasecret'
+app.config['SECRET_KEY'] = os.environ.get('FLASK_KEY')
 database = SQLAlchemy(app)
 
 bootstrap = Bootstrap4(app)
