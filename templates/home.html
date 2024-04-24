@@ -47,43 +47,33 @@
 
 
 
-<main class="container">
-  <div class="d-flex align-items-center p-3 my-3 text-white bg-purple rounded shadow-sm">
-  </div>
+<!-- HTML Template with Drag-and-Drop -->
+<ul id="sortable">
+    {% for task in tasks %}
+    <li id="{{ task.id }}">{{ task.title }}</li>
+    {% endfor %}
+</ul>
 
-  <div class="my-3 p-3 bg-body rounded shadow-sm">
-    <h6 class="border-bottom pb-2 mb-0">Tasks To Do</h6>
-    <br>
-      <div class="list-group">
-       <ul id="sortable">
-         {% for task in all_tasks %}
-         {% if task.account_id == current_user.id %}
-           <li class="list-group-item">
-         <div class="d-flex text-body-secondary pt-3">
-                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="30" fill="currentColor" class="bi bi-diamond-fill" viewBox="0 0 16 16">
-  <path fill-rule="evenodd" d="M6.95.435c.58-.58 1.52-.58 2.1 0l6.515 6.516c.58.58.58 1.519 0 2.098L9.05 15.565c-.58.58-1.519.58-2.098 0L.435 9.05a1.48 1.48 0 0 1 0-2.098z"/>
-</svg>
-            <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
-              <div class="d-flex justify-content-between">
-                <strong class="text-gray-dark">{{ task.title }}</strong>
-                <span> Created: {{ task.date_created }}</span>
-              </div>
-              <span class="d-block">{{ task.description }}</span>
-            </div>
-             <a class="btn btn primary" href="{{ url_for('edit', todo_id=task.id) }}" >Edit</a>
-         </div>
-          </li>
-          {% endif %}
-           {% endfor %}
-       </ul>
-    </div>
-  </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js"></script>
+
+<script>
+$(document).ready(function() {
+    $("#sortable").sortable({
+        update: function(event, ui) {
+            var taskOrder = [];
+            $("#sortable li").each(function() {
+                taskOrder.push($(this).attr('id'));
+            });
+            $.post("/update_task_order", { task_order: taskOrder });
+        }
+    });
+});
+</script>
 
 
-</main>
-<script src="/docs/5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
-    <script src="offcanvas-navbar.js"></script>
+
 
 </body>
 
