@@ -8,9 +8,6 @@
 <h1>To Do</h1>
    <div align="left ">
    {{ render_form(form) }}
-   <br>
-   <button class="btn btn primary"><a class="btn btn primary" href="{{ url_for('delete_post', task_id=task.id) }}">Delete</a></button>
-   </div>
 </section>
 
 {% endblock %}
