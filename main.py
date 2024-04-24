@@ -117,7 +117,7 @@ def home():
 
     return render_template('home.html', current_date_time=FORMAT_TIME, quote=current_quote, all_tasks=todos, user=current_user)
 
-@app.route('/update_task_order', methods=['POST'])
+@app.route('/update_task_order', methods=['POST', 'GET'])
 def update_task_order():
     task_order = request.form.getlist('task_order[]')
     for index, task_id in enumerate(task_order, start=1):
