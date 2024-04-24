@@ -46,7 +46,7 @@
 
 <!-- HTML Template with Drag-and-Drop -->
 <ul id="sortable">
-    {% for task in tasks %}
+    {% for task in all_tasks %}
     <li id="{{ task.id }}">{{ task.title }}</li>
     {% endfor %}
 </ul>
